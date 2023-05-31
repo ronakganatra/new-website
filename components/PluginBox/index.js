@@ -52,7 +52,7 @@ export default function PluginBox({
   href,
 }) {
   return (
-    <MaybeLink href={href} className={s.box}>
+    <MaybeLink href={href} className={s.box} data-vercel-edit-target>
       {image}
       <div className={s.boxBody}>
         <div className={s.boxTitle}>{title}</div>

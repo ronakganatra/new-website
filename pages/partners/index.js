@@ -114,7 +114,7 @@ export default function Partners({ subscription, preview }) {
         <div className={s.posts}>
           {ordered.map((post, i) => (
             <Link href={`/partners/${post.slug}`} key={post.slug}>
-              <a className={s.post}>
+              <a className={s.post} data-vercel-edit-target>
                 <div
                   className={classNames(s.postLogo, styles[i % styles.length])}
                 >
