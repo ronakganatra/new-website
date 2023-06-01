@@ -24,6 +24,7 @@ import {
   PluginDetails,
   Announce,
 } from 'components/PluginToolkit';
+import { clean } from 'utils/stega';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -38,7 +39,7 @@ export const getStaticPaths = gqlStaticPaths(
     }
   `,
   'chunks',
-  ({ plugins }) => plugins.map((p) => p.packageName.split(/\//)),
+  ({ plugins }) => plugins.map((p) => clean(p.packageName).split(/\//)),
 );
 
 export const getStaticProps = gqlStaticProps(
@@ -232,7 +233,9 @@ export default function Plugin({ plugin, preview }) {
                 <a
                   rel="noopener noreferrer"
                   target="_blank"
-                  href={`https://www.npmjs.com/package/${plugin.packageName}`}
+                  href={`https://www.npmjs.com/package/${clean(
+                    plugin.packageName,
+                  )}`}
                 >
                   Visit NPM
                 </a>

@@ -22,6 +22,7 @@ import tiny from 'tiny-json-http';
 import { githubRepoToManifest, githubRepoToUrl } from 'utils/githubRepo';
 import { handleErrors } from 'lib/datocms';
 import { Announce } from 'components/PluginToolkit';
+import { clean } from 'utils/stega';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -89,7 +90,7 @@ export const getStaticProps = handleErrors(
     }
 
     const { body } = await tiny.get({
-      url: githubRepoToManifest(page.githubRepo),
+      url: githubRepoToManifest(clean(page.githubRepo)),
     });
 
     return {

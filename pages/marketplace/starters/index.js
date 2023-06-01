@@ -10,6 +10,7 @@ import tiny from 'tiny-json-http';
 import { githubRepoToManifest } from 'utils/githubRepo';
 import { handleErrors } from 'lib/datocms';
 import { Announce } from 'components/PluginToolkit';
+import { clean } from 'utils/stega';
 
 export const getStaticProps = handleErrors(async ({ preview }) => {
   const {
@@ -47,7 +48,7 @@ export const getStaticProps = handleErrors(async ({ preview }) => {
   const startersData = await Promise.all(
     starters.map(async (starter) => {
       const { body } = await tiny.get({
-        url: githubRepoToManifest(starter.githubRepo),
+        url: githubRepoToManifest(clean(starter.githubRepo)),
       });
       return { ...JSON.parse(body), ...starter };
     }),

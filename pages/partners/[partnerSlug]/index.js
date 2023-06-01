@@ -27,6 +27,7 @@ import InterstitialTitle from 'components/InterstitialTitle';
 import SidebarPane from 'components/SidebarPane';
 import StickySidebar from 'components/StickySidebar';
 import truncate from 'truncate';
+import { clean } from 'utils/stega';
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -331,7 +332,7 @@ export default function PartnerPage({ preview, subscription, plugins }) {
                   <PluginBox
                     key={post.packageName}
                     title={post.title}
-                    href={`/marketplace/plugins/i/${post.packageName}`}
+                    href={`/marketplace/plugins/i/${clean(post.packageName)}`}
                     image={
                       post.coverImage && post.coverImage.responsiveImage ? (
                         <Image
