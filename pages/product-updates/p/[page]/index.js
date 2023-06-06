@@ -18,10 +18,23 @@ import { renderMetaTags } from 'react-datocms';
 import { useQuerySubscription } from 'utils/useQuerySubscription';
 import PostContent from 'components/PostContent';
 import pageStyle from 'pages/docs/pageStyle.module.css';
+import { clean } from 'utils/stega';
+import { vercelStegaSplit } from '@vercel/stega';
 
 import { range } from 'range';
 
 import s from './style.module.css';
+
+function invisibleStega(string) {
+  const { cleaned, encoded } = vercelStegaSplit(string);
+
+  return (
+    <span data-vercel-edit-target>
+      {cleaned}
+      <span style={{ display: 'none' }}>{encoded}</span>
+    </span>
+  );
+}
 
 export const getStaticPaths = gqlStaticPaths(
   `
@@ -148,10 +161,10 @@ export default function Changelog({ preview, subscription }) {
                   {post.categories.map((cat) => (
                     <span
                       key={cat.name}
-                      className={s.category}
+                      className={clean(s.category)}
                       style={{ backgroundColor: cat.color.hex }}
                     >
-                      {cat.name}
+                      {invisibleStega(cat.name)}
                     </span>
                   ))}
                 </div>
